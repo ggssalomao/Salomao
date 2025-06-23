@@ -1,31 +1,53 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Linha Suprema - Flipbook Final</title>
-  <script src="https://unpkg.com/stpageflip@2.0.6/dist/stpageflip.min.js"></script>
-  <style>
-    html, body { margin: 0; height: 100%; background: #ddd; }
-    #flipbook { width: 100%; height: 100%; }
-  </style>
+    <meta charset="UTF-8">
+    <title>Linha Suprema - Flipbook Simples</title>
+    <style>
+        body {
+            margin: 0;
+            background: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+        .flipbook {
+            width: 90%;
+            max-width: 1000px;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            margin: 20px auto;
+            padding: 10px;
+        }
+        .page {
+            margin-bottom: 10px;
+        }
+        .page img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
 </head>
 <body>
-  <div id="flipbook"></div>
+    <h1>Linha Suprema - Catálogo</h1>
+    <div class="flipbook">
+    <div class="page"><img src="pages/page_001.png" alt="Página 1"></div>
+<div class="page"><img src="pages/page_002.png" alt="Página 2"></div>
+<div class="page"><img src="pages/page_003.png" alt="Página 3"></div>
+<div class="page"><img src="pages/page_004.png" alt="Página 4"></div>
+<div class="page"><img src="pages/page_005.png" alt="Página 5"></div>
+<div class="page"><img src="pages/page_006.png" alt="Página 6"></div>
+<div class="page"><img src="pages/page_007.png" alt="Página 7"></div>
+<div class="page"><img src="pages/page_008.png" alt="Página 8"></div>
+<div class="page"><img src="pages/page_009.png" alt="Página 9"></div>
+<div class="page"><img src="pages/page_010.png" alt="Página 10"></div>
+<div class="page"><img src="pages/page_011.png" alt="Página 11"></div>
+<div class="page"><img src="pages/page_012.png" alt="Página 12"></div>
 
-  <script>
-    const pageFlip = new St.PageFlip(document.getElementById("flipbook"), {
-      width: 900,
-      height: 600,
-      size: "stretch",
-      showCover: true,
-      useMouseEvents: true,
-      flippingTime: 700
-    });
-
-    const pages = [{src: "pages/page_001.png"}, {src: "pages/page_002.png"}, {src: "pages/page_003.png"}, {src: "pages/page_004.png"}, {src: "pages/page_005.png"}, {src: "pages/page_006.png"}, {src: "pages/page_007.png"}, {src: "pages/page_008.png"}, {src: "pages/page_009.png"}, {src: "pages/page_010.png"}, {src: "pages/page_011.png"}, {src: "pages/page_012.png"}];
-
-    pageFlip.loadFromImages(pages);
-  </script>
+    </div>
 </body>
 </html>
