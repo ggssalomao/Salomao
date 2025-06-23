@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Linha Suprema - Flipbook Realista Completo</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script src="https://unpkg.com/stpageflip@2.0.6/dist/stpageflip.min.js"></script>
+  <style>
+    html, body { margin: 0; height: 100%; background: #ddd; }
+    #flipbook { width: 100%; height: 100%; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+  <div id="flipbook"></div>
+
+  <script>
+    const pdfPath = "Linha Suprema.pdf";
+    const container = document.getElementById("flipbook");
+    const pageFlip = new St.PageFlip(container, {
+      width: 900,
+      height: 600,
+      size: "stretch",
+      showCover: true,
+      useMouseEvents: true,
+      flippingTime: 700
+    });
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+    pdfjsLib.getDocument(pdfPath).promise.then(pdf => {
+      const pages = [];
+
+      function renderPage(num) {
+        return pdf.getPage(num).then(page => {
+          const viewport = page.getViewport({ scale: 2 });
+          const canvas = document.createElement('canvas');
+          const context = canvas.getContext('2d');
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+
+          return page.render({ canvasContext: context, viewport: viewport }).promise.then(() => {
+            pages.push(canvas.toDataURL("image/png"));
+          });
+        });
+      }
+
+      const renderPromises = [];
+      for (let i = 1; i <= pdf.numPages; i++) {
+        renderPromises.push(renderPage(i));
+      }
+
+      Promise.all(renderPromises).then(() => {
+        const pageData = pages.map(dataUrl => ({ src: dataUrl }));
+        pageFlip.loadFromImages(pageData);
+      });
+    });
+  </script>
+</body>
+</html>
